@@ -1,3 +1,4 @@
 ScreenshotsSaved/
 Outputs/
-.idea/*.xml
+.idea/
+.class

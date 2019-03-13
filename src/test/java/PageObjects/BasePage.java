@@ -14,7 +14,16 @@ public class BasePage {
     WebDriverWait wait;
     DriverUtils driverUtils;
 
-    @FindBy(xpath = "//div[@id='SrchSelectDw']//input[@type='text' and @placeholder]")
+    @FindBy(id = "cityFormModal")
+    private WebElement selectCityAlert;
+
+    @FindBy(id = "citySuggestInputHomePopup")
+    private WebElement citySearchbar;
+
+    @FindBy(xpath = "//ul[@class='cityselectlist clearfix']/li[text()='Bangalore']")
+    private WebElement suggestedCityBangalore;
+
+    @FindBy(xpath = "//input[@placeholder='Locality or Builder or Project Name']")
     private WebElement searchbarMain;
 
     @FindBy(id = "hdrsrchtpbtn")
@@ -48,10 +57,19 @@ public class BasePage {
         driverUtils = new DriverUtils(driver);
     }
 
+    public BasePage setCityInitially()
+    {
+        if(selectCityAlert.isDisplayed())
+        {
+            suggestedCityBangalore.click();
+        }
+
+        return new BasePage(driver);
+    }
+
     public PropertySearchListingPage search(String keyword2search)
     {
-        //wait.until(ExpectedConditions.elementToBeClickable(searchbarMain));
-        //searchbarMain.clear();
+        wait.until(ExpectedConditions.elementToBeClickable(searchbarMain));
         searchbarMain.sendKeys(keyword2search);
         searchButton.click();
 

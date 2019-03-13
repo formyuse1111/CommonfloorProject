@@ -1,7 +1,6 @@
 package AllTests;
 
 import PageObjects.BasePage;
-import PageObjects.HomePage;
 import PageObjects.PropertySearchListingPage;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -13,9 +12,10 @@ public class AllSearchedPropertiesTest extends BaseTest {
     @Test
     public void validateAllSearchedPropertiesHasAValidTitleOnH2()
     {
-        HomePage homePage = new HomePage(driver);
-        homePage = homePage.setCityInitially();
-        PropertySearchListingPage propertySearchListingPage = homePage.search("2bhk");
+        logger.info("Starting the test: validateAllSearchedPropertiesHasAValidTitleOnH2()");
+        BasePage basePage = new BasePage(driver);
+        basePage = basePage.setCityInitially();
+        PropertySearchListingPage propertySearchListingPage = basePage.search("2bhk");
         propertySearchListingPage = propertySearchListingPage.selectApartmentInFilter();
         propertySearchListingPage = propertySearchListingPage.selectMinPriceByValue("1000000", "9000000");
 
