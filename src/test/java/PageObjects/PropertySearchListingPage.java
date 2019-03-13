@@ -1,5 +1,6 @@
 package PageObjects;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PropertySearchListingPage  extends BasePage {
+
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @FindBy(id = "total_result")
     private WebElement header1;
@@ -32,12 +35,14 @@ public class PropertySearchListingPage  extends BasePage {
 
     public List<String> getAllPropertyTitles()
     {
+        logger.info("Going to get all property titles now");
         List<String> allTitles = new ArrayList<String>();
         for (WebElement elem : allPropertyTitles)
         {
             allTitles.add(elem.getText());
         }
 
+        logger.info("Here are all the titles: " + allTitles);
         return allTitles;
     }
 

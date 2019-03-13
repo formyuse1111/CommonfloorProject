@@ -1,6 +1,9 @@
 package PageObjects;
 
+import AllTests.BaseTest;
 import Utilities.DriverUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +16,7 @@ public class BasePage {
     WebDriver driver;
     WebDriverWait wait;
     DriverUtils driverUtils;
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @FindBy(id = "cityFormModal")
     private WebElement selectCityAlert;
@@ -59,6 +63,7 @@ public class BasePage {
 
     public BasePage setCityInitially()
     {
+        logger.info("Inside setCityInitially()");
         if(selectCityAlert.isDisplayed())
         {
             suggestedCityBangalore.click();
@@ -67,8 +72,10 @@ public class BasePage {
         return new BasePage(driver);
     }
 
-    public PropertySearchListingPage search(String keyword2search)
-    {
+    public PropertySearchListingPage search(String keyword2search) throws InterruptedException {
+        logger.info("Inside - search()");
+        Thread.sleep(5000);
+        wait.until(ExpectedConditions.visibilityOf(searchbarMain));
         wait.until(ExpectedConditions.elementToBeClickable(searchbarMain));
         searchbarMain.sendKeys(keyword2search);
         searchButton.click();
